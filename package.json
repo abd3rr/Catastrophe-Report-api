@@ -5,11 +5,11 @@
    "main": "index.js",
    "scripts": {
       "build": "tsc",
-      "start": "node server.js",
+      "start": "ts-node src/server.ts",
+      "dev": "ts-node src/server.ts",
       "typeorm": "typeorm-ts-node-commonjs",
       "typeorm:migrate": "npm run typeorm migration:generate -- -n",
       "typeorm:run": "npm run typeorm migration:run",
-      "dev": "npm run typeorm:migrate && npm run typeorm:run && node src/server.js",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "keywords": [],
