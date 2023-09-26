@@ -1,6 +1,0 @@
-typeorm-ts-node-commonjs -d data-source.ts migration:generate test 
-typeorm-ts-node-commonjs -d data-source.ts migration:run 
-ts-node .\server.ts
-pg_dump postgres://postgres:123456@localhost:5432/mydb | psql "postgres://default:0QRdeK5aimCT@ep-dark-pond-87402800.us-east-1.postgres.vercel-storage.com:5432/verceldb"
-
-hide faces from pics using api 
