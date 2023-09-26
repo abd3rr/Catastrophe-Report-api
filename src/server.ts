@@ -1,31 +1,23 @@
-import {config as dotenvConfig} from 'dotenv';
-
-import { ConnectionOptions, createConnection } from 'typeorm';
+import { createConnection } from 'typeorm';
 import app from './app';
 import http = require('http'); 
 import { Image } from './models/Image';
 import { Location } from './models/Location';
 import { Report } from './models/Report';
-import { parse } from 'pg-connection-string';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-
-dotenvConfig();
-
-const { host, port, user: username, password, database } = parse(process.env.POSTGRES_URL);
 
 const init = async () => {
-  const connectionOptions: PostgresConnectionOptions = {
-    type: 'postgres',
-    host,
-    port: port ? Number(port) : 5432,  // use 5432 as default if port is not provided
-    username,
-    password,
-    database,
-    entities: [Image, Location, Report], // add your entities here
-    migrations: ['/migrations/**/*.ts'], // add your migrations here
-    synchronize: true, // set to false in production
-    logging: true,
-  };
+  await createConnection({
+    type:'postgres',
+    host:'localhost',
+    port:5432,
+    username:'postgres',
+    password:'123456',
+    database:'cataReportsDB',
+    entities:[  Image, Location, Report],
+    migrations: [  '/migrations/**/*.ts'],
+    synchronize:true, // true for development, false for production
+    logging:true,
+});
 
   const PORT = process.env.PORT || 3000;
   const server = http.createServer(app);
