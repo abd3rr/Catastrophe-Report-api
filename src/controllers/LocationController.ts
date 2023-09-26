@@ -6,7 +6,7 @@ import { Location } from "../models/Location";
 @injectable()
 export class LocationController {
     constructor(
-        @inject("LocationService") private locationService: LocationService,
+        @inject("LocationService") private locationService: LocationService
     ) {}
 
     async getAll(req: Request, res: Response) {

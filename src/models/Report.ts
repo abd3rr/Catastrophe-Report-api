@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Location } from "./Location";
 import { Image } from "./Image";
-import { EventType, Severity } from "../utils/enums";
+import { EventType } from "./EventType";
+import { Severity } from "./Severity";
 
 @Entity()
 export class Report{
@@ -15,17 +16,11 @@ export class Report{
     @Column("text")
     description!:string;
 
-    @Column({
-        type:"enum",
-        enum: EventType
-    })
-    eventType!:EventType;
+    @ManyToOne(() => EventType, eventType => eventType.reports)
+    eventType!: EventType;
 
-    @Column({
-        type:"enum",
-        enum: Severity
-    })
-    severity!:Severity;
+    @ManyToOne(() => Severity, severity => severity.reports)
+    severity!: Severity;
 
     @Column()
     verified!:boolean;

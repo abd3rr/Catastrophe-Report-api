@@ -4,19 +4,26 @@ import http = require('http');
 import { Image } from './models/Image';
 import { Location } from './models/Location';
 import { Report } from './models/Report';
+import * as dotenv from 'dotenv';
+import { Severity } from './models/Severity';
+import { EventType } from './models/EventType';
+
+dotenv.config({ path: '../.env' });
+
+
 
 const init = async () => {
   await createConnection({
-    type:'postgres',
-    host:'localhost',
-    port:5432,
-    username:'postgres',
-    password:'123456',
-    database:'cataReportsDB',
-    entities:[  Image, Location, Report],
-    migrations: [  '/migrations/**/*.ts'],
-    synchronize:true, // true for development, false for production
-    logging:true,
+    type: process.env.DB_TYPE! as any,  
+    host: process.env.DB_HOST!,
+    port: parseInt(process.env.DB_PORT!) || 5432,
+    username: process.env.DB_USERNAME!,
+    password: process.env.DB_PASSWORD!,
+    database: process.env.DB_DATABASE!,
+    entities: [Image, Location, Report,Severity,EventType],
+    migrations: ['/migrations/**/*.ts'],
+    synchronize: true, // true for development, false for production
+    logging: true,
 });
 
   const PORT = process.env.PORT || 3000;
