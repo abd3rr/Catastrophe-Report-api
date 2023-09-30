@@ -1,6 +1,6 @@
 .idea/
 .vscode/
-.env/
+.env
 node_modules/
 tmp/
 build/
@@ -8,3 +8,4 @@ temp/
 snaplet/
 migrationHelp.txt
 .snaplet/
+uploads/*
